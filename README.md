@@ -4,29 +4,29 @@ RxActions is a library to smooth RxJava usage by combining actions.
 
 ##Rationale
 
-Sometimes you have to describe side effects in your Observable chain, by means of doOnNext, doOnError, or even in the subscription. Writing several of those operators may incu on minimal performance operations, and make it a bit less readable. RxActions allows you to combine actions.
+Sometimes you have to describe side effects in your Observable chain, by means of doOnNext, doOnError, or even in the subscription. Writing several of those operators may incur on minimal performance operations, and make it a bit less readable. RxActions allows you to combine those actions sequentially.
 
 ##Usage
 
-RxTuples come as lazily evaluated ActionN and its main use case is for doOnNext, doOnError, and subscribe operators.
+RxActions comes as lazily evaluated ActionN and its main use case is for doOnNext, doOnError, and subscribe operators. Please note subscribe comes in several flavours that accept ActionN for better composability.
 
-Log correct server response and display on UI
+Log correct server response and display on UI:
 
     getApi().requestListFromServer()
             .subscribe(RxActions.act(logElement(), getUi.displayElements()));
             
 Log an error to console, then display UI message:
 
-        getApi().requestListFromServer()
-                .subscribe(/* ... */),
-                RxActions.act(logError(), getUI().displayErrorMessage()));
+    getApi().requestListFromServer()
+            .subscribe(/* ... */),
+            RxActions.act(logError(), getUi().displayErrorMessage()));
                 
 Log error before and display a message before applying an error correction operator
 
-        getApi().storeInDatabase()
-        .doOnError(RxActions.act(logError(), getUI().displayErrorMessage()))
-        .onErrorReturn(Collections.emptyList())
-        .subscribe(/* ... */);
+    getApi().storeInDatabase()
+            .doOnError(RxActions.act(logError(), getUi().displayErrorMessage()))
+            .onErrorReturn(Collections.emptyList())
+            .subscribe(/* ... */);
 
 ##Distribution
 
