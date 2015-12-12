@@ -10,10 +10,10 @@ Sometimes you have to describe side effects in your Observable chain, by means o
 
 RxActions comes as lazily evaluated ActionN and its main use case is for doOnNext, doOnError, and subscribe operators. Please note subscribe comes in several flavours that accept ActionN for better composability.
 
-Log correct server response and display on UI:
+Log correct server response, cache it, and display on UI:
 
     getApi().requestListFromServer()
-            .subscribe(RxActions.act(logElement(), getUi.displayElements()));
+            .subscribe(RxActions.act(logElement(), cacheElements(), getUi.displayElements()));
             
 Log an error to console, then display UI message:
 
@@ -21,10 +21,10 @@ Log an error to console, then display UI message:
             .subscribe(/* ... */),
             RxActions.act(logError(), getUi().displayErrorMessage()));
                 
-Log error before and display a message before applying an error correction operator
+Log error, clear cache, and display a message before applying an error correction operator:
 
     getApi().storeInDatabase()
-            .doOnError(RxActions.act(logError(), getUi().displayErrorMessage()))
+            .doOnError(RxActions.act(logError(), getUi().displayErrorMessage(), clearCache()))
             .onErrorReturn(Collections.emptyList())
             .subscribe(/* ... */);
 
