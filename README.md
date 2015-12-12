@@ -18,8 +18,8 @@ Log correct server response, cache it, and display on UI:
 Log an error to console, then display UI message:
 
     getApi().requestListFromServer()
-            .subscribe(/* ... */),
-            RxActions.act(logError(), getUi().displayErrorMessage()));
+            .subscribe(/* ... */,
+                       RxActions.act(logError(), getUi().displayErrorMessage()));
                 
 Log error, clear cache, and display a message before applying an error correction operator:
 
