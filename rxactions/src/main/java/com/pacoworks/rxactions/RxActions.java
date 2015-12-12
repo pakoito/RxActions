@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) pakoito 2015
  *
@@ -17,6 +16,7 @@
 
 package com.pacoworks.rxactions;
 
+import rx.functions.Action0;
 import rx.functions.Action1;
 
 public final class RxActions {
@@ -78,6 +78,65 @@ public final class RxActions {
             public void call(T t) {
                 for (Action1<T> action : actions) {
                     action.call(t);
+                }
+            }
+        };
+    }
+
+    public static Action0 act(final Action0 action1, final Action0 action2) {
+        return new Action0() {
+            @Override
+            public void call() {
+                action1.call();
+                action2.call();
+            }
+        };
+    }
+
+    public static Action0 act(final Action0 action1, final Action0 action2, final Action0 action3) {
+        return new Action0() {
+            @Override
+            public void call() {
+                action1.call();
+                action2.call();
+                action3.call();
+            }
+        };
+    }
+
+    public static Action0 act(final Action0 action1, final Action0 action2, final Action0 action3,
+            final Action0 action4) {
+        return new Action0() {
+            @Override
+            public void call() {
+                action1.call();
+                action2.call();
+                action3.call();
+                action4.call();
+            }
+        };
+    }
+
+    public static Action0 act(final Action0 action1, final Action0 action2, final Action0 action3,
+            final Action0 action4, final Action0 action5) {
+        return new Action0() {
+            @Override
+            public void call() {
+                action1.call();
+                action2.call();
+                action3.call();
+                action4.call();
+                action5.call();
+            }
+        };
+    }
+
+    public static Action0 act(final Action0... actions) {
+        return new Action0() {
+            @Override
+            public void call() {
+                for (Action0 action : actions) {
+                    action.call();
                 }
             }
         };

@@ -23,6 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import rx.Observable;
+import rx.functions.Action0;
 import rx.functions.Action1;
 
 public class RxActionsTest {
@@ -47,16 +48,27 @@ public class RxActionsTest {
                         RxActions.act(doAction(sum), doAction(sum)),
                         RxActions.act(doError(arrayError), doError(arrayError),
                                 doError(arrayError), doError(arrayError), doError(arrayError),
-                                doError(arrayError)));
-        Assert.assertEquals(5, sum[0]);
+                                doError(arrayError)),
+                        RxActions.act(doComplete(sum), doComplete(sum), doComplete(sum),
+                                doComplete(sum)));
+        Assert.assertEquals(9, sum[0]);
         Assert.assertEquals(6, arrayError.size());
+    }
+
+    private Action0 doComplete(final int[] sum) {
+        return new Action0() {
+            @Override
+            public void call() {
+                sum[0] += 1;
+            }
+        };
     }
 
     private Action1<Integer> doAction(final int[] sum) {
         return new Action1<Integer>() {
             @Override
             public void call(Integer integer) {
-                sum[0] += integer;
+                sum[0] += 1;
             }
         };
     }
