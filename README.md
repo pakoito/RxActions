@@ -4,7 +4,7 @@ RxActions is a library to smooth RxJava usage by combining actions.
 
 ##Rationale
 
-Sometimes you have to describe side effects in your Observable chain, by means of doOnNext, doOnError, or even in the subscription. Writing several of those operators may incur on minimal performance operations, and make it a bit less readable. RxActions allows you to combine those actions sequentially.
+Sometimes you have to describe side effects in your Observable chain, by means of doOnNext, doOnError, or even in the subscription. Writing several of those operators may incur on minimal performance penalties, and make the chain more verbose. RxActions allows you to combine those actions sequentially.
 
 ##Usage
 
