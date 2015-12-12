@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) pakoito 2015
  *
@@ -41,11 +40,15 @@ public class RxActionsTest {
 
     @Test
     public void testWarmup() throws Exception {
-        Observable.just(1).subscribe(
-                RxActions.act(doAction(sum), doAction(sum)),
-                RxActions.act(doError(arrayError), doError(arrayError), doError(arrayError),
-                        doError(arrayError), doError(arrayError), doError(arrayError)));
-        Assert.assertEquals(2, sum[0]);
+        Observable
+                .just(1)
+                .doOnNext(RxActions.act(doAction(sum), doAction(sum), doAction(sum)))
+                .subscribe(
+                        RxActions.act(doAction(sum), doAction(sum)),
+                        RxActions.act(doError(arrayError), doError(arrayError),
+                                doError(arrayError), doError(arrayError), doError(arrayError),
+                                doError(arrayError)));
+        Assert.assertEquals(5, sum[0]);
         Assert.assertEquals(6, arrayError.size());
     }
 
