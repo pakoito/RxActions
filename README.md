@@ -1,16 +1,16 @@
-#RxActions
+# RxActions
 
 RxActions is a library to smooth RxJava usage by functionally composing actions.
 
 For the RxJava 2.X version please go to [RxConsumers](https://github.com/pakoito/RxConsumers).
 
-##Rationale
+## Rationale
 
 Sometimes you have to describe side effects in your Observable chain, by means of doOnNext, doOnError, or even in the subscription. Writing several of those operators may incur on minimal performance penalties, and make the chain more verbose. RxActions allows you to combine those actions sequentially.
 
 One acknowledged critique is that the composition can be done inlined and imperatively instead by using a lambda. That's not available on Java 1.6 versions without 3rd party tools, making it effectively more verbose.
 
-##Usage
+## Usage
 
 RxActions comes as lazily evaluated ActionN and its main use case is for doOnNext, doOnError, and subscribe operators. Please note subscribe comes in several flavours that accept ActionN for better composability.
 
@@ -32,7 +32,7 @@ Log error, clear cache, and display a message before applying an error correctio
             .onErrorReturn(Collections.emptyList())
             .subscribe(/* ... */);
 
-##Distribution
+## Distribution
 
 Add as a dependency to your `build.gradle`
 
@@ -63,7 +63,7 @@ or to your `pom.xml`
         <version>1.0.0</version>
     </dependency>
 
-##License
+## License
 
 Copyright (c) pakoito 2015
 
